@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tienda de stickers personalizados con diseños únicos. Encuentra el sticker perfecto para decorar tu mundo.">
+    <meta name="keywords" content="stickers, calcomanías, adhesivos, decoración, diseños personalizados">
+    <meta property="og:title" content="Tienda de Stickers - Diseños Únicos">
+    <meta property="og:description" content="Descubre nuestra colección de stickers con colores vibrantes">
+    <meta property="og:type" content="website">
+    <title>Tienda de Stickers Mica</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">✨ Mica stickers</div>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>🎨 Descubre Nuestros Stickers</h1>
+        <p>Diseños únicos para decorar tu mundo</p>
+    </section>
+
+    <!-- Filtros -->
+<div class="filters-container">
+    <div class="filter-dropdown">
+        <button class="filter-btn" id="categoryBtn">
+            📂 Categoría: <span id="selectedCategory">Todos</span> ▾
+        </button>
+        <div class="dropdown-content" id="categoryDropdown">
+            <a href="#" onclick="selectCategory('todos', 'Todos'); return false;">Todos</a>
+            <div class="dropdown-submenu">
+                <a href="#" class="submenu-trigger">Stickers ›</a>
+                <div class="submenu-content">
+                    <a href="#" onclick="selectCategory('stickers-todos', 'Stickers - Todos'); return false;">Todos</a>
+                    <a href="#" onclick="selectCategory('stickers-holograficos', 'Stickers - Holográficos'); return false;">Holográficos</a>
+                    <a href="#" onclick="selectCategory('stickers-mates', 'Stickers - Mates'); return false;">Mates</a>
+                    <a href="#" onclick="selectCategory('stickers-otro', 'Stickers - Otro'); return false;">Otro</a>
+                </div>
+            </div>
+            <div class="dropdown-submenu">
+                <a href="#" class="submenu-trigger">Agendas ›</a>
+                <div class="submenu-content">
+                    <a href="#" onclick="selectCategory('agendas-todos', 'Agendas - Todos'); return false;">Todos</a>
+                    <a href="#" onclick="selectCategory('agendas-estudiantil', 'Agendas - Estudiantil'); return false;">Estudiantil</a>
+                    <a href="#" onclick="selectCategory('agendas-docente', 'Agendas - Docente'); return false;">Docente</a>
+                </div>
+            </div>
+            <div class="dropdown-submenu">
+                <a href="#" class="submenu-trigger">Otros ›</a>
+                <div class="submenu-content">
+                    <a href="#" onclick="selectCategory('otros-todos', 'Otros - Todos'); return false;">Todos</a>
+                    <!-- Agregá más opciones acá -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="products-container">
+        <div class="products-grid" id="productsGrid">
+            <!-- Los productos se cargarán con JavaScript -->
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">×</button>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <p class="modal-description" id="modalDescription"></p>
+            <div class="price-container">
+                <div class="main-price" id="modalPriceMain"></div>
+                <div class="pack-prices" id="packPrices"></div>
+            </div>
+
+            <div class="variant-selector">
+                <label for="variantSelector">Tipo:</label>
+                <select id="variantSelector" onchange="changeVariant()">
+                    <!-- Se carga con JS -->
+                </select>
+            </div>
+
+            <div class="color-selector">
+                <h3>Elige tu color:</h3>
+                <div class="color-options" id="colorOptions"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Buttons -->
+    <div class="social-buttons">
+        <a href="https://wa.me/5491131857044" target="_blank" class="social-btn whatsapp-btn" title="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.instagram.com/noteaferresalmar/" target="_blank" class="social-btn instagram-btn" title="Instagram">
+           <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.mercadolibre.com.ar/publicaciones/listado?filters=OMNI_ACTIVE|OMNI_INACTIVE|CHANNEL_NO_PROXIMITY_AND_NO_MP_MERCHANTS&page=1&sort=DEFAULT" 
+        target="_blank" 
+        class="social-btn mercado-btn" 
+        title="Mercado Libre">
+        <img src="images/MercadoLibre.png" alt="Mercado Libre" width="35" height="35">
+            </a>
+     
+          
+    </div>
+    <script src="script.js"></script>
+</body>
+<!-- Footer con Calculadora de Envío -->
+<footer class="shipping-footer">
+    <div class="footer-container">
+        <h2>📦 Calculá tu envío</h2>
+        <p class="footer-subtitle">Ingresá tu código postal para conocer el costo</p>
+        
+        <div class="shipping-calculator">
+            <input 
+                type="text" 
+                id="postalCode" 
+                placeholder="Ej: 1425" 
+                maxlength="4"
+                pattern="[0-9]*"
+            >
+            <button onclick="calculateShipping()" class="calc-btn">Calcular</button>
+        </div>
+        
+        <div id="shippingResult" class="shipping-result"></div>
+        
+        <div class="footer-info">
+            <p>🎨 Sticker Shop © 2025</p>
+            <div class="footer-links">
+                <a href="sobre-nosotros.html">Sobre Nosotros</a>
+                <a href="contacto.html">Contacto</a>
+            </div>
+        </div>
+    </div>
+</footer>
+</html>
