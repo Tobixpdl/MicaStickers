@@ -159,7 +159,7 @@ document.getElementById('imageUpload').addEventListener('change', (e) => {
 // Logo upload
 document.getElementById('logoUpload').addEventListener('change', (e) => {
     const file = e.target.files[0];
-    if (file) {
+    if (file) { 
         const reader = new FileReader();
         reader.onload = (event) => {
             logoDataUrl = event.target.result;
@@ -178,7 +178,10 @@ document.getElementById('backgroundUpload').addEventListener('change', (e) => {
         reader.onload = (event) => {
             backgroundImageUrl = event.target.result;
             coverBackground.style.backgroundImage = `url(${backgroundImageUrl})`;
-            coverBackground.style.background = ''; // Limpiar color sólido
+            coverBackground.style.backgroundSize = 'cover'; // AGREGAR ESTO
+            coverBackground.style.backgroundPosition = 'center'; // AGREGAR ESTO
+            coverBackground.style.backgroundRepeat = 'no-repeat'; // AGREGAR ESTO
+            coverBackground.style.backgroundColor = 'transparent'; // CAMBIAR ESTO
             state[currentTab].backgroundImage = backgroundImageUrl;
             state[currentTab].background = '';
         };
@@ -215,9 +218,10 @@ document.getElementById('deleteElement').addEventListener('click', () => {
 // Text controls
 document.getElementById('textContent').addEventListener('input', (e) => {
     if (selectedElement && selectedElement.classList.contains('text-element')) {
-        const handleHtml = selectedElement.querySelector('.resize-handle').outerHTML;
-        selectedElement.textContent = e.target.value;
-        selectedElement.innerHTML += handleHtml;
+        const textSpan = selectedElement.querySelector('span');
+        if (textSpan) {
+            textSpan.textContent = e.target.value;
+        }
         saveCurrentTab();
     }
 });
@@ -272,15 +276,34 @@ function addTextElement(text) {
     const textEl = document.createElement('div');
     textEl.className = 'cover-element text-element';
     textEl.dataset.id = `element-${elementCounter++}`;
-    textEl.textContent = text;
     textEl.style.left = '50px';
     textEl.style.top = '50px';
     textEl.style.fontSize = '24px';
     textEl.style.color = '#000000';
     textEl.style.fontFamily = 'Arial';
+    
+    // Crear un span para el texto
+    const textSpan = document.createElement('span');
+    textSpan.textContent = text;
+    textSpan.style.pointerEvents = 'none';
+    
+    textEl.appendChild(textSpan);
     textEl.innerHTML += '<div class="resize-handle"></div>';
+    
     coverPage.appendChild(textEl);
     makeElementInteractive(textEl);
+    
+    // Seleccionar automáticamente el nuevo elemento
+    selectedElement = textEl;
+    document.querySelectorAll('.cover-element').forEach(el => el.classList.remove('selected'));
+    textEl.classList.add('selected');
+    document.getElementById('textControls').style.display = 'flex';
+    document.getElementById('imageControls').style.display = 'none';
+    document.getElementById('textContent').value = text;
+    document.getElementById('textSize').value = 24;
+    document.getElementById('textColor').value = '#000000';
+    document.getElementById('fontFamily').value = 'Arial';
+    
     saveCurrentTab();
 }
 
@@ -314,7 +337,8 @@ function makeElementInteractive(element) {
         if (element.classList.contains('text-element')) {
             document.getElementById('textControls').style.display = 'flex';
             document.getElementById('imageControls').style.display = 'none';
-            const content = element.childNodes[0].textContent || element.textContent.replace(/\s*$/, '');
+            const textSpan = element.querySelector('span');
+            const content = textSpan ? textSpan.textContent : 'Tu Texto';
             document.getElementById('textContent').value = content;
             document.getElementById('textSize').value = parseInt(element.style.fontSize);
             document.getElementById('textColor').value = rgbToHex(element.style.color) || '#000000';
@@ -406,8 +430,8 @@ function saveCurrentTab() {
         };
         
         if (el.classList.contains('text-element')) {
-            const content = el.childNodes[0] ? el.childNodes[0].textContent : el.textContent.replace(/\s*$/, '');
-            data.content = content;
+            const textSpan = el.querySelector('span');
+            data.content = textSpan ? textSpan.textContent : 'Tu Texto';
             data.fontSize = el.style.fontSize;
             data.color = el.style.color;
             data.fontFamily = el.style.fontFamily;
@@ -431,10 +455,14 @@ function loadTab() {
     });
     
     // Set background
+  // Set background
     if (state[currentTab].backgroundImage) {
         backgroundImageUrl = state[currentTab].backgroundImage;
         coverBackground.style.backgroundImage = `url(${backgroundImageUrl})`;
-        coverBackground.style.background = '';
+        coverBackground.style.backgroundSize = 'cover'; // AGREGAR
+        coverBackground.style.backgroundPosition = 'center'; // AGREGAR
+        coverBackground.style.backgroundRepeat = 'no-repeat'; // AGREGAR
+        coverBackground.style.backgroundColor = 'transparent'; // AGREGAR
     } else {
         backgroundImageUrl = null;
         coverBackground.style.backgroundImage = '';
@@ -460,12 +488,17 @@ function loadTab() {
             const textEl = document.createElement('div');
             textEl.className = 'cover-element text-element';
             textEl.dataset.id = data.id;
-            textEl.textContent = data.content;
             textEl.style.left = data.left;
             textEl.style.top = data.top;
             textEl.style.fontSize = data.fontSize;
             textEl.style.color = data.color;
             textEl.style.fontFamily = data.fontFamily || 'Arial';
+            
+            const textSpan = document.createElement('span');
+            textSpan.textContent = data.content;
+            textSpan.style.pointerEvents = 'none';
+            
+            textEl.appendChild(textSpan);
             textEl.innerHTML += '<div class="resize-handle"></div>';
             coverPage.appendChild(textEl);
             makeElementInteractive(textEl);

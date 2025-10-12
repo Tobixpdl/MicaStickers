@@ -454,6 +454,18 @@ select {
     .controls {
         position: static;
         max-height: none;
+        overflow-y: visible;
+    }
+
+    .preview-area {
+        flex-direction: row; /* Mantener horizontal */
+        padding: 20px;
+        overflow-x: auto;
+    }
+
+    .spiral-container {
+        flex-direction: column; /* Mantener vertical */
+        order: -1; /* Poner antes del cuaderno */
     }
 
     .agenda-preview.size-a4 {
@@ -465,12 +477,37 @@ select {
         width: 248px;
         height: 350px;
     }
+}
 
-    .preview-area {
-        flex-direction: column;
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
     }
 
-    .spiral-container {
-        flex-direction: row;
+    .header h1 {
+        font-size: 1.8em;
+    }
+
+    .main-content {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .controls {
+        padding: 15px;
+    }
+
+    .preview-area {
+        padding: 15px;
+    }
+
+    .agenda-preview.size-a4 {
+        width: 280px;
+        height: 396px;
+    }
+
+    .agenda-preview.size-a5 {
+        width: 198px;
+        height: 280px;
     }
 }
