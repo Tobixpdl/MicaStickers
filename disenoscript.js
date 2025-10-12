@@ -10,6 +10,10 @@ let backgroundImageUrl = null;
 let rotationStart = 0;
 let elementCenterX = 0;
 let elementCenterY = 0;
+let resizeStartWidth = 0;
+let resizeStartHeight = 0;
+let resizeStartX = 0;
+let resizeStartY = 0;
 
 const agendaPreview = document.getElementById('agendaPreview');
 const coverPage = document.getElementById('coverPage');
@@ -140,8 +144,10 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 
 // Background color
 document.getElementById('bgColor').addEventListener('input', (e) => {
-    coverBackground.style.background = e.target.value;
-    state[currentTab].background = e.target.value;
+    if (!state[currentTab].backgroundImage) {
+        coverBackground.style.background = e.target.value;
+        state[currentTab].background = e.target.value;
+    }
 });
 
 // Image upload
@@ -154,20 +160,7 @@ document.getElementById('imageUpload').addEventListener('change', (e) => {
         };
         reader.readAsDataURL(file);
     }
-});
-
-// Logo upload
-document.getElementById('logoUpload').addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file) { 
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            logoDataUrl = event.target.result;
-            state.logoDataUrl = logoDataUrl;
-            updateBackCoverFooter();
-        };
-        reader.readAsDataURL(file);
-    }
+    e.target.value = '';
 });
 
 // Background image upload
@@ -178,15 +171,16 @@ document.getElementById('backgroundUpload').addEventListener('change', (e) => {
         reader.onload = (event) => {
             backgroundImageUrl = event.target.result;
             coverBackground.style.backgroundImage = `url(${backgroundImageUrl})`;
-            coverBackground.style.backgroundSize = 'cover'; // AGREGAR ESTO
-            coverBackground.style.backgroundPosition = 'center'; // AGREGAR ESTO
-            coverBackground.style.backgroundRepeat = 'no-repeat'; // AGREGAR ESTO
-            coverBackground.style.backgroundColor = 'transparent'; // CAMBIAR ESTO
+            coverBackground.style.backgroundSize = 'cover';
+            coverBackground.style.backgroundPosition = 'center';
+            coverBackground.style.backgroundRepeat = 'no-repeat';
+            coverBackground.style.backgroundColor = 'transparent';
             state[currentTab].backgroundImage = backgroundImageUrl;
             state[currentTab].background = '';
         };
         reader.readAsDataURL(file);
     }
+    e.target.value = '';
 });
 
 // Clear background
@@ -266,7 +260,7 @@ function addImageElement(src) {
     img.style.width = '150px';
     img.style.height = '150px';
     img.style.transform = 'rotate(0deg)';
-    img.innerHTML = `<img src="${src}"><div class="resize-handle"></div><div class="rotate-handle"></div>`;
+    img.innerHTML = `<img src="${src}" style="width: 100%; height: 100%; object-fit: contain; pointer-events: none;"><div class="resize-handle"></div><div class="rotate-handle"></div>`;
     coverPage.appendChild(img);
     makeElementInteractive(img);
     saveCurrentTab();
@@ -281,8 +275,9 @@ function addTextElement(text) {
     textEl.style.fontSize = '24px';
     textEl.style.color = '#000000';
     textEl.style.fontFamily = 'Arial';
+    textEl.style.width = 'auto';
+    textEl.style.height = 'auto';
     
-    // Crear un span para el texto
     const textSpan = document.createElement('span');
     textSpan.textContent = text;
     textSpan.style.pointerEvents = 'none';
@@ -293,7 +288,6 @@ function addTextElement(text) {
     coverPage.appendChild(textEl);
     makeElementInteractive(textEl);
     
-    // Seleccionar automáticamente el nuevo elemento
     selectedElement = textEl;
     document.querySelectorAll('.cover-element').forEach(el => el.classList.remove('selected'));
     textEl.classList.add('selected');
@@ -309,9 +303,16 @@ function addTextElement(text) {
 
 function makeElementInteractive(element) {
     element.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+        
         if (e.target.classList.contains('resize-handle')) {
             isResizing = true;
             selectedElement = element;
+            const rect = element.getBoundingClientRect();
+            resizeStartWidth = rect.width;
+            resizeStartHeight = rect.height;
+            resizeStartX = e.clientX;
+            resizeStartY = e.clientY;
         } else if (e.target.classList.contains('rotate-handle')) {
             isRotating = true;
             selectedElement = element;
@@ -340,9 +341,9 @@ function makeElementInteractive(element) {
             const textSpan = element.querySelector('span');
             const content = textSpan ? textSpan.textContent : 'Tu Texto';
             document.getElementById('textContent').value = content;
-            document.getElementById('textSize').value = parseInt(element.style.fontSize);
+            document.getElementById('textSize').value = parseInt(element.style.fontSize) || 24;
             document.getElementById('textColor').value = rgbToHex(element.style.color) || '#000000';
-            document.getElementById('fontFamily').value = element.style.fontFamily.replace(/['"]/g, '');
+            document.getElementById('fontFamily').value = element.style.fontFamily.replace(/['"]/g, '').split(',')[0].trim();
         } else {
             document.getElementById('textControls').style.display = 'none';
             document.getElementById('imageControls').style.display = 'flex';
@@ -374,27 +375,14 @@ document.addEventListener('mousemove', (e) => {
         selectedElement.style.left = x + 'px';
         selectedElement.style.top = y + 'px';
     } else if (isResizing && selectedElement) {
-        const rect = selectedElement.getBoundingClientRect();
-        const rotation = getRotation(selectedElement) * Math.PI / 180;
+        const deltaX = e.clientX - resizeStartX;
+        const deltaY = e.clientY - resizeStartY;
         
-        // Calcular la diferencia del mouse respecto al centro
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const deltaX = e.clientX - centerX;
-        const deltaY = e.clientY - centerY;
+        const newWidth = Math.max(30, resizeStartWidth + deltaX);
+        const newHeight = Math.max(30, resizeStartHeight + deltaY);
         
-        // Rotar el delta de vuelta para obtener dimensiones correctas
-        const unrotatedX = deltaX * Math.cos(-rotation) - deltaY * Math.sin(-rotation);
-        const unrotatedY = deltaX * Math.sin(-rotation) + deltaY * Math.cos(-rotation);
-        
-        // Nuevas dimensiones (el doble porque medimos desde el centro)
-        const newWidth = Math.abs(unrotatedX * 2);
-        const newHeight = Math.abs(unrotatedY * 2);
-        
-        if (newWidth > 30 && newHeight > 30) {
-            selectedElement.style.width = newWidth + 'px';
-            selectedElement.style.height = newHeight + 'px';
-        }
+        selectedElement.style.width = newWidth + 'px';
+        selectedElement.style.height = newHeight + 'px';
     } else if (isRotating && selectedElement) {
         const angle = Math.atan2(e.clientY - elementCenterY, e.clientX - elementCenterX);
         let rotation = angle * (180 / Math.PI) - rotationStart;
@@ -436,7 +424,8 @@ function saveCurrentTab() {
             data.color = el.style.color;
             data.fontFamily = el.style.fontFamily;
         } else {
-            data.content = el.querySelector('img').src;
+            const img = el.querySelector('img');
+            data.content = img ? img.src : '';
             data.rotation = getRotation(el);
         }
         
@@ -447,22 +436,19 @@ function saveCurrentTab() {
 }
 
 function loadTab() {
-    // Clear current elements
     coverPage.querySelectorAll('.cover-element').forEach(el => {
         if (!el.classList.contains('back-cover-footer')) {
             el.remove();
         }
     });
     
-    // Set background
-  // Set background
     if (state[currentTab].backgroundImage) {
         backgroundImageUrl = state[currentTab].backgroundImage;
         coverBackground.style.backgroundImage = `url(${backgroundImageUrl})`;
-        coverBackground.style.backgroundSize = 'cover'; // AGREGAR
-        coverBackground.style.backgroundPosition = 'center'; // AGREGAR
-        coverBackground.style.backgroundRepeat = 'no-repeat'; // AGREGAR
-        coverBackground.style.backgroundColor = 'transparent'; // AGREGAR
+        coverBackground.style.backgroundSize = 'cover';
+        coverBackground.style.backgroundPosition = 'center';
+        coverBackground.style.backgroundRepeat = 'no-repeat';
+        coverBackground.style.backgroundColor = 'transparent';
     } else {
         backgroundImageUrl = null;
         coverBackground.style.backgroundImage = '';
@@ -470,7 +456,6 @@ function loadTab() {
         document.getElementById('bgColor').value = state[currentTab].background || '#ffffff';
     }
     
-    // Load elements
     state[currentTab].elements.forEach(data => {
         if (data.type === 'image') {
             const img = document.createElement('div');
@@ -481,7 +466,7 @@ function loadTab() {
             img.style.width = data.width;
             img.style.height = data.height;
             img.style.transform = `rotate(${data.rotation || 0}deg)`;
-            img.innerHTML = `<img src="${data.content}"><div class="resize-handle"></div><div class="rotate-handle"></div>`;
+            img.innerHTML = `<img src="${data.content}" style="width: 100%; height: 100%; object-fit: contain; pointer-events: none;"><div class="resize-handle"></div><div class="rotate-handle"></div>`;
             coverPage.appendChild(img);
             makeElementInteractive(img);
         } else {
@@ -493,6 +478,8 @@ function loadTab() {
             textEl.style.fontSize = data.fontSize;
             textEl.style.color = data.color;
             textEl.style.fontFamily = data.fontFamily || 'Arial';
+            textEl.style.width = data.width || 'auto';
+            textEl.style.height = data.height || 'auto';
             
             const textSpan = document.createElement('span');
             textSpan.textContent = data.content;
@@ -505,7 +492,6 @@ function loadTab() {
         }
     });
     
-    // Update back cover footer
     if (currentTab === 'back') {
         updateBackCoverFooter();
     } else {
@@ -558,10 +544,8 @@ document.getElementById('downloadBtn').addEventListener('click', async () => {
     btn.textContent = '⏳ Generando...';
     btn.disabled = true;
     
-    // Save current state
     saveCurrentTab();
     
-    // Hide selection borders and spiral
     document.querySelectorAll('.cover-element').forEach(el => {
         el.classList.remove('selected');
     });
@@ -570,7 +554,6 @@ document.getElementById('downloadBtn').addEventListener('click', async () => {
     spiralContainer.style.display = 'none';
     
     try {
-        // Capture front
         const originalTab = currentTab;
         currentTab = 'front';
         loadTab();
@@ -582,7 +565,6 @@ document.getElementById('downloadBtn').addEventListener('click', async () => {
             allowTaint: true
         });
         
-        // Capture back
         currentTab = 'back';
         loadTab();
         await new Promise(resolve => setTimeout(resolve, 300));
@@ -593,12 +575,10 @@ document.getElementById('downloadBtn').addEventListener('click', async () => {
             allowTaint: true
         });
         
-        // Download both
         downloadCanvas(frontCanvas, 'agenda-tapa.png');
         await new Promise(resolve => setTimeout(resolve, 500));
         downloadCanvas(backCanvas, 'agenda-contratapa.png');
         
-        // Restore original tab
         currentTab = originalTab;
         loadTab();
         

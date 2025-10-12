@@ -18,9 +18,14 @@
     <header>
         <nav>
             <div class="logo">✨ Mica stickers</div>
-            <ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="navMenu">
                 <li><a href="index.html">Inicio</a></li>
-                <li><a href="diseno.html">Disenar mi agenda</a></li>
+                <li><a href="diseno.html">Diseñar mi agenda</a></li>
             </ul>
         </nav>
     </header>
@@ -30,41 +35,39 @@
         <p>Diseños únicos para decorar tu mundo</p>
     </section>
 
-    <!-- Filtros -->
-<div class="filters-container">
-    <div class="filter-dropdown">
-        <button class="filter-btn" id="categoryBtn">
-            📂 Categoría: <span id="selectedCategory">Todos</span> ▾
-        </button>
-        <div class="dropdown-content" id="categoryDropdown">
-            <a href="#" onclick="selectCategory('todos', 'Todos'); return false;">Todos</a>
-            <div class="dropdown-submenu">
-                <a href="#" class="submenu-trigger">Stickers ›</a>
-                <div class="submenu-content">
-                    <a href="#" onclick="selectCategory('stickers-todos', 'Stickers - Todos'); return false;">Todos</a>
-                    <a href="#" onclick="selectCategory('stickers-holograficos', 'Stickers - Holográficos'); return false;">Holográficos</a>
-                    <a href="#" onclick="selectCategory('stickers-mates', 'Stickers - Mates'); return false;">Mates</a>
-                    <a href="#" onclick="selectCategory('stickers-otro', 'Stickers - Otro'); return false;">Otro</a>
+    <div class="filters-container">
+        <div class="filter-dropdown">
+            <button class="filter-btn" id="categoryBtn">
+                📂 Categoría: <span id="selectedCategory">Todos</span> ▾
+            </button>
+            <div class="dropdown-content" id="categoryDropdown">
+                <a href="#" onclick="selectCategory('todos', 'Todos'); return false;">Todos</a>
+                <div class="dropdown-submenu">
+                    <a href="#" class="submenu-trigger">Stickers ›</a>
+                    <div class="submenu-content">
+                        <a href="#" onclick="selectCategory('stickers-todos', 'Stickers - Todos'); return false;">Todos</a>
+                        <a href="#" onclick="selectCategory('stickers-holograficos', 'Stickers - Holográficos'); return false;">Holográficos</a>
+                        <a href="#" onclick="selectCategory('stickers-mates', 'Stickers - Mates'); return false;">Mates</a>
+                        <a href="#" onclick="selectCategory('stickers-otro', 'Stickers - Otro'); return false;">Otro</a>
+                    </div>
                 </div>
-            </div>
-            <div class="dropdown-submenu">
-                <a href="#" class="submenu-trigger">Agendas ›</a>
-                <div class="submenu-content">
-                    <a href="#" onclick="selectCategory('agendas-todos', 'Agendas - Todos'); return false;">Todos</a>
-                    <a href="#" onclick="selectCategory('agendas-estudiantil', 'Agendas - Estudiantil'); return false;">Estudiantil</a>
-                    <a href="#" onclick="selectCategory('agendas-docente', 'Agendas - Docente'); return false;">Docente</a>
+                <div class="dropdown-submenu">
+                    <a href="#" class="submenu-trigger">Agendas ›</a>
+                    <div class="submenu-content">
+                        <a href="#" onclick="selectCategory('agendas-todos', 'Agendas - Todos'); return false;">Todos</a>
+                        <a href="#" onclick="selectCategory('agendas-estudiantil', 'Agendas - Estudiantil'); return false;">Estudiantil</a>
+                        <a href="#" onclick="selectCategory('agendas-docente', 'Agendas - Docente'); return false;">Docente</a>
+                    </div>
                 </div>
-            </div>
-            <div class="dropdown-submenu">
-                <a href="#" class="submenu-trigger">Otros ›</a>
-                <div class="submenu-content">
-                    <a href="#" onclick="selectCategory('otros-todos', 'Otros - Todos'); return false;">Todos</a>
-                    <!-- Agregá más opciones acá -->
+                <div class="dropdown-submenu">
+                    <a href="#" class="submenu-trigger">Otros ›</a>
+                    <div class="submenu-content">
+                        <a href="#" onclick="selectCategory('otros-todos', 'Otros - Todos'); return false;">Todos</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
     <div class="products-container">
         <div class="products-grid" id="productsGrid">
@@ -72,7 +75,6 @@
         </div>
     </div>
 
-    <!-- Modal -->
     <div class="modal" id="productModal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal()">×</button>
@@ -87,7 +89,6 @@
             <div class="variant-selector">
                 <label for="variantSelector">Tipo:</label>
                 <select id="variantSelector" onchange="changeVariant()">
-                    <!-- Se carga con JS -->
                 </select>
             </div>
 
@@ -98,7 +99,6 @@
         </div>
     </div>
 
-    <!-- Social Buttons -->
     <div class="social-buttons">
         <a href="https://wa.me/5491131857044" target="_blank" class="social-btn whatsapp-btn" title="WhatsApp">
             <i class="fab fa-whatsapp"></i>
@@ -111,38 +111,37 @@
         class="social-btn mercado-btn" 
         title="Mercado Libre">
         <img src="images/MercadoLibre.png" alt="Mercado Libre" width="35" height="35">
-            </a>
-     
-          
+        </a>
     </div>
-    <script src="script.js"></script>
-</body>
-<!-- Footer con Calculadora de Envío -->
-<footer class="shipping-footer">
-    <div class="footer-container">
-        <h2>📦 Calculá tu envío</h2>
-        <p class="footer-subtitle">Ingresá tu código postal para conocer el costo</p>
-        
-        <div class="shipping-calculator">
-            <input 
-                type="text" 
-                id="postalCode" 
-                placeholder="Ej: 1425" 
-                maxlength="4"
-                pattern="[0-9]*"
-            >
-            <button onclick="calculateShipping()" class="calc-btn">Calcular</button>
-        </div>
-        
-        <div id="shippingResult" class="shipping-result"></div>
-        
-        <div class="footer-info">
-            <p>🎨 Sticker Shop © 2025</p>
-            <div class="footer-links">
-                <a href="sobre-nosotros.html">Sobre Nosotros</a>
-                <a href="contacto.html">Contacto</a>
+
+    <footer class="shipping-footer">
+        <div class="footer-container">
+            <h2>📦 Calculá tu envío</h2>
+            <p class="footer-subtitle">Ingresá tu código postal para conocer el costo</p>
+            
+            <div class="shipping-calculator">
+                <input 
+                    type="text" 
+                    id="postalCode" 
+                    placeholder="Ej: 1425" 
+                    maxlength="4"
+                    pattern="[0-9]*"
+                >
+                <button onclick="calculateShipping()" class="calc-btn">Calcular</button>
+            </div>
+            
+            <div id="shippingResult" class="shipping-result"></div>
+            
+            <div class="footer-info">
+                <p>🎨 Sticker Shop © 2025</p>
+                <div class="footer-links">
+                    <a href="sobre-nosotros.html">Sobre Nosotros</a>
+                    <a href="contacto.html">Contacto</a>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
 </html>
