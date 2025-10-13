@@ -302,24 +302,35 @@ function addTextElement(text) {
 }
 
 function makeElementInteractive(element) {
-    element.addEventListener('mousedown', (e) => {
+    // Función auxiliar para obtener coordenadas unificadas
+    const getEventCoords = (e) => {
+        if (e.touches && e.touches.length > 0) {
+            return { clientX: e.touches[0].clientX, clientY: e.touches[0].clientY };
+        }
+        return { clientX: e.clientX, clientY: e.clientY };
+    };
+
+    const handleStart = (e) => {
         e.stopPropagation();
         
-        if (e.target.classList.contains('resize-handle')) {
+        const coords = getEventCoords(e);
+        const target = e.target;
+        
+        if (target.classList.contains('resize-handle')) {
             isResizing = true;
             selectedElement = element;
             const rect = element.getBoundingClientRect();
             resizeStartWidth = rect.width;
             resizeStartHeight = rect.height;
-            resizeStartX = e.clientX;
-            resizeStartY = e.clientY;
-        } else if (e.target.classList.contains('rotate-handle')) {
+            resizeStartX = coords.clientX;
+            resizeStartY = coords.clientY;
+        } else if (target.classList.contains('rotate-handle')) {
             isRotating = true;
             selectedElement = element;
             const rect = element.getBoundingClientRect();
             elementCenterX = rect.left + rect.width / 2;
             elementCenterY = rect.top + rect.height / 2;
-            const angle = Math.atan2(e.clientY - elementCenterY, e.clientX - elementCenterX);
+            const angle = Math.atan2(coords.clientY - elementCenterY, coords.clientX - elementCenterX);
             rotationStart = angle * (180 / Math.PI);
             const currentRotation = getRotation(element);
             rotationStart = rotationStart - currentRotation;
@@ -328,8 +339,8 @@ function makeElementInteractive(element) {
             selectedElement = element;
             const rect = element.getBoundingClientRect();
             const parentRect = coverPage.getBoundingClientRect();
-            dragOffset.x = e.clientX - rect.left;
-            dragOffset.y = e.clientY - rect.top;
+            dragOffset.x = coords.clientX - rect.left;
+            dragOffset.y = coords.clientY - rect.top;
         }
         
         document.querySelectorAll('.cover-element').forEach(el => el.classList.remove('selected'));
@@ -353,7 +364,13 @@ function makeElementInteractive(element) {
         }
         
         e.preventDefault();
-    });
+    };
+
+    // Agregar eventos de mouse
+    element.addEventListener('mousedown', handleStart);
+    
+    // Agregar eventos táctiles
+    element.addEventListener('touchstart', handleStart, { passive: false });
 }
 
 function getRotation(element) {
@@ -363,28 +380,41 @@ function getRotation(element) {
     return match ? parseFloat(match[1]) : 0;
 }
 
-document.addEventListener('mousemove', (e) => {
+// Función auxiliar para obtener coordenadas
+const getEventCoords = (e) => {
+    if (e.touches && e.touches.length > 0) {
+        return { clientX: e.touches[0].clientX, clientY: e.touches[0].clientY };
+    }
+    return { clientX: e.clientX, clientY: e.clientY };
+};
+
+// Manejar movimiento (mouse y touch)
+const handleMove = (e) => {
+    const coords = getEventCoords(e);
+    
     if (isDragging && selectedElement) {
         const parentRect = coverPage.getBoundingClientRect();
-        let x = e.clientX - parentRect.left - dragOffset.x;
-        let y = e.clientY - parentRect.top - dragOffset.y;
+        let x = coords.clientX - parentRect.left - dragOffset.x;
+        let y = coords.clientY - parentRect.top - dragOffset.y;
         
         x = Math.max(0, Math.min(x, parentRect.width - selectedElement.offsetWidth));
         y = Math.max(0, Math.min(y, parentRect.height - selectedElement.offsetHeight));
         
         selectedElement.style.left = x + 'px';
         selectedElement.style.top = y + 'px';
+        e.preventDefault();
     } else if (isResizing && selectedElement) {
-        const deltaX = e.clientX - resizeStartX;
-        const deltaY = e.clientY - resizeStartY;
+        const deltaX = coords.clientX - resizeStartX;
+        const deltaY = coords.clientY - resizeStartY;
         
         const newWidth = Math.max(30, resizeStartWidth + deltaX);
         const newHeight = Math.max(30, resizeStartHeight + deltaY);
         
         selectedElement.style.width = newWidth + 'px';
         selectedElement.style.height = newHeight + 'px';
+        e.preventDefault();
     } else if (isRotating && selectedElement) {
-        const angle = Math.atan2(e.clientY - elementCenterY, e.clientX - elementCenterX);
+        const angle = Math.atan2(coords.clientY - elementCenterY, coords.clientX - elementCenterX);
         let rotation = angle * (180 / Math.PI) - rotationStart;
         rotation = Math.round(rotation);
         if (rotation < 0) rotation += 360;
@@ -393,17 +423,28 @@ document.addEventListener('mousemove', (e) => {
         selectedElement.style.transform = `rotate(${rotation}deg)`;
         document.getElementById('rotationSlider').value = rotation;
         document.getElementById('rotationValue').textContent = rotation + '°';
+        e.preventDefault();
     }
-});
+};
 
-document.addEventListener('mouseup', () => {
+// Manejar fin de interacción
+const handleEnd = () => {
     if (isDragging || isResizing || isRotating) {
         saveCurrentTab();
     }
     isDragging = false;
     isResizing = false;
     isRotating = false;
-});
+};
+
+// Event listeners para mouse
+document.addEventListener('mousemove', handleMove);
+document.addEventListener('mouseup', handleEnd);
+
+// Event listeners para touch
+document.addEventListener('touchmove', handleMove, { passive: false });
+document.addEventListener('touchend', handleEnd);
+document.addEventListener('touchcancel', handleEnd);
 
 function saveCurrentTab() {
     const elements = Array.from(coverPage.querySelectorAll('.cover-element:not(.back-cover-footer *)'));

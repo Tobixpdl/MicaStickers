@@ -561,3 +561,25 @@ select {
         height: 280px;
     }
 }
+/* Mejoras para dispositivos táctiles */
+@media (hover: none) and (pointer: coarse) {
+    .resize-handle,
+    .rotate-handle {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .resize-handle {
+        right: -10px;
+        bottom: -10px;
+    }
+    
+    .rotate-handle {
+        top: -10px;
+        right: -10px;
+    }
+    
+    .cover-element {
+        touch-action: none;
+    }
+}
