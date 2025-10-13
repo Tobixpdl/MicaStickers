@@ -97,49 +97,49 @@ const products = [
         colors: [
             { name: "Multicolor", hex: "#FFE5D9", image: "images/productos/planners_1.png"  }
         ]
-    },
-    {
-        id: 3,
-        name: "Agenda Estudiantil 2025",
-        description: "Agenda perfecta para estudiantes.",
-        type: "agendas",
-        subtype: "estudiantil",
-        variants: [
-            {
-                type: "2026",
-                prices: {
-                    unit: "$13.500"
-                }
-            },
-        ],
-        colors: [
-            { name: "Azul", hex: "#C7CEEA", image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=400&fit=crop" }
-        ]
-    },
-    {
-        id: 4,
-        name: "Agenda Docente 2025",
-        description: "Agenda diseñada para docentes.",
-        type: "agendas",
-        subtype: "docente",
-        variants: [
-            {
-                type: "2026",
-                prices: {
-                    unit: "$13.500"
-                }
-            },
-            {
-                type: "perpetua",
-                prices: {
-                    unit: "$13.500"
-                }
-            },
-        ],
-        colors: [
-            { name: "Verde", hex: "#C9F4E7", image: "https://images.unsplash.com/photo-1517842645767-c639042777db?w=400&h=400&fit=crop" }
-        ]
     }
+     // {
+    //     id: 3,
+    //     name: "Agenda Estudiantil 2025",
+    //     description: "Agenda perfecta para estudiantes.",
+    //     type: "agendas",
+    //     subtype: "estudiantil",
+    //     variants: [
+    //         {
+    //             type: "2026",
+    //             prices: {
+    //                 unit: "$13.500"
+    //             }
+    //         },
+    //     ],
+    //     colors: [
+    //         { name: "Azul", hex: "#C7CEEA", image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=400&fit=crop" }
+    //     ]
+    // },
+    // {
+    //     id: 4,
+    //     name: "Agenda Docente 2025",
+    //     description: "Agenda diseñada para docentes.",
+    //     type: "agendas",
+    //     subtype: "docente",
+    //     variants: [
+    //         {
+    //             type: "2026",
+    //             prices: {
+    //                 unit: "$13.500"
+    //             }
+    //         },
+    //         {
+    //             type: "perpetua",
+    //             prices: {
+    //                 unit: "$13.500"
+    //             }
+    //         },
+    //     ],
+    //     colors: [
+    //         { name: "Verde", hex: "#C9F4E7", image: "https://images.unsplash.com/photo-1517842645767-c639042777db?w=400&h=400&fit=crop" }
+    //     ]
+    // }
 ];
 
 let currentProduct = null;
@@ -356,3 +356,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 });
+
