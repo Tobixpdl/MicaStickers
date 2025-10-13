@@ -125,6 +125,15 @@ nav a:hover {
     margin-bottom: 15px;
 }
 
+.product-image.cover {
+    object-fit: cover;
+}
+
+.product-image.contain {
+    object-fit: contain;
+    background-color: #f9f9f9; 
+}
+
 .product-name {
     font-size: 20px;
     font-weight: bold;
@@ -202,12 +211,17 @@ nav a:hover {
     transform: rotate(90deg);
 }
 
+.div-image{
+    display: flex;
+    justify-content: center;
+}
+
 .modal-image {
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
+    height: auto;
+    max-height: 600px;
+    object-fit: contain;
     border-radius: 20px;
-    margin-bottom: 25px;
+    background: #f5f5f5;
 }
 
 .modal-title {
@@ -231,7 +245,7 @@ nav a:hover {
 }
 
 .color-selector {
-    margin-top: 25px;
+    margin-top: 15px;
 }
 
 .color-selector h3 {
@@ -627,34 +641,13 @@ nav a:hover {
     color: #FF6B9D;
 }
 
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    padding: 5px;
+.modal-description {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #666;
+    white-space: pre-line; /* Agrega esta línea */
 }
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background: var(--dark-text);
-    margin: 3px 0;
-    transition: all 0.3s;
-    border-radius: 3px;
-}
-
-.hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 8px);
-}
-
-.hamburger.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(8px, -8px);
-}
-
 
 
 @media (max-width: 768px) {
@@ -665,44 +658,16 @@ nav a:hover {
     .shipping-footer h2 {
         font-size: 24px;
     }
-    .hamburger {
-        display: flex;
-    }
-
+    
     nav ul {
-        position: fixed;
-        top: 70px;
-        right: -100%;
-        width: 250px;
-        height: calc(100vh - 70px);
-        background: white;
-        flex-direction: column;
-        padding: 20px;
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-        transition: right 0.3s ease;
-        gap: 20px;
+        gap: 15px;
+        font-size: 14px;
     }
-
-    nav ul.active {
-        right: 0;
-    }
-
-    nav ul li {
-        width: 100%;
-    }
-
-    nav ul li a {
-        display: block;
-        padding: 12px;
-        border-radius: 10px;
-        transition: background 0.3s;
-    }
-
-    nav ul li a:hover {
-        background: var(--pastel-pink);
+    
+    .logo {
+        font-size: 22px;
     }
 }
-
 
 @media (max-width: 768px) {
     .price-container {
@@ -731,5 +696,59 @@ nav a:hover {
     
     .dropdown-submenu.active .submenu-content {
         display: block;
+    }
+}
+
+/* Mejoras para modal en móvil */
+@media (max-width: 768px) {
+    .modal {
+        padding: 0;
+        align-items: center;
+    }
+    
+    .modal-content {
+        padding: 20px;
+        max-width: 95%;
+        width: 95%;
+        max-height: 95vh;
+        margin: auto;
+        overflow-y: auto;
+    }
+    
+    .modal-image {
+        height: auto;
+        object-fit: contain;
+        max-height: 400px;
+    }
+    
+    .modal-title {
+        font-size: 22px;
+        margin-top: 10px;
+    }
+    
+    .modal-description {
+        font-size: 14px;
+    }
+    
+    .close-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+        top: 10px;
+        right: 10px;
+    }
+    
+    .main-price {
+        font-size: 28px;
+    }
+    
+    .pack-price {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+    
+    .color-option {
+        width: 30px;
+        height: 30px;
     }
 }

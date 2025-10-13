@@ -18,11 +18,6 @@
     <header>
         <nav>
             <div class="logo">✨ Mica stickers</div>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
             <ul id="navMenu">
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="diseno.html">Diseñar mi agenda</a></li>
@@ -31,7 +26,7 @@
     </header>
 
     <section class="hero">
-        <h1>🎨 Descubre Nuestros Stickers</h1>
+        <h1>🎨 Descubre Nuestros Productos</h1>
         <p>Diseños únicos para decorar tu mundo</p>
     </section>
 
@@ -55,6 +50,7 @@
                     <a href="#" class="submenu-trigger">Agendas ›</a>
                     <div class="submenu-content">
                         <a href="#" onclick="selectCategory('agendas-todos', 'Agendas - Todos'); return false;">Todos</a>
+                        <a href="#" onclick="selectCategory('agendas-2026', 'Agendas - 2026'); return false;">2026</a>
                         <a href="#" onclick="selectCategory('agendas-estudiantil', 'Agendas - Estudiantil'); return false;">Estudiantil</a>
                         <a href="#" onclick="selectCategory('agendas-docente', 'Agendas - Docente'); return false;">Docente</a>
                     </div>
@@ -78,7 +74,12 @@
     <div class="modal" id="productModal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal()">×</button>
-            <img class="modal-image" id="modalImage" src="" alt="">
+            <div class="div-image">
+                <img class="modal-image" id="modalImage" src="" alt="">
+            </div>
+            <div class="color-selector">
+                <div class="color-options" id="colorOptions"></div>
+            </div>
             <h2 class="modal-title" id="modalTitle"></h2>
             <p class="modal-description" id="modalDescription"></p>
             <div class="price-container">
@@ -92,10 +93,6 @@
                 </select>
             </div>
 
-            <div class="color-selector">
-                <h3>Elige tu color:</h3>
-                <div class="color-options" id="colorOptions"></div>
-            </div>
         </div>
     </div>
 

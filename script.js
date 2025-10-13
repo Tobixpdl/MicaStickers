@@ -1,68 +1,101 @@
+//como estructurar un producto:
+// {
+//     id: 3,
+//     name: "Agenda Estudiantil 2025",
+//     description: "Agenda perfecta para estudiantes.",
+//     type: "agendas",
+//     subtype: "estudiantil",
+//     variants: [
+//         {
+//             type: "tapa-dura",
+//             prices: {
+//                 unit: "$13.500",
+//                 pack3: "3 x $4.800",
+//                 pack5: "5 x $7.500"
+//             }
+//         },
+//         {
+//             type: "tapa-blanda",
+//             prices: {
+//                 unit: "$13.500",
+//                 pack3: "3 x $4.000",
+//                 pack5: "5 x $6.500"
+//             }
+//         }
+//     ],
+//     colors: [
+//         { name: "Azul", hex: "#C7CEEA", image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=400&fit=crop" }
+//     ]
+// },
+
 // Estructura de productos actualizada
 const products = [
     {
         id: 1,
-        name: "Sticker Kawaii Cat",
-        description: "Adorable sticker de gatito en estilo kawaii.",
-        type: "stickers",
-        subtype: "holograficos",
+        name: "Agendas 2026",
+        description: `¡🎁Agregale cualquier texto totalmente gratis!
+
+            La agenda te incluye:
+            🌟 Hoja de datos personal
+            🗓️ Calendarios 2026 / 2027
+            🎯 Organizador anual
+            🔐 Hoja de contraseñas
+            💸 Planilla de gastos
+            🎉 Feriados 2026
+            🌈 Portadas mes a mes + Planner mensual
+            🕒 Semana a la vista (¡sin horarios, más libertad!)
+            📞 Agenda telefónica
+            📝 Hojas para notas`,
+        type: "agendas",
+        subtype: "2026",
+        imageFit: "contain",
         variants: [
             {
-                type: "holograficos",
+                type: "2026",
                 prices: {
-                    unit: "$1000",
-                    pack3: "3 x $2.500",
-                    pack10: "10 x $5.000"
-                }
-            },
-            {
-                type: "vinilo blanco",
-                prices: {
-                    unit: "$700",
-                    pack3: "3 x $1.500",
-                    pack10: "10 x $3.500"
-                }
-            },
-            {
-                type: "otro",
-                prices: {
-                    unit: "$450",
-                    pack3: "3 x $1.100",
-                    pack10: "10 x $3.500"
+                    unit: "$12000"
                 }
             }
         ],
         colors: [
-            { name: "Rosa", hex: "#FFD6E8", image: "https://images.unsplash.com/photo-1618826411640-d6df44dd3f7a?w=400&h=400&fit=crop" },
-            { name: "Azul", hex: "#C7CEEA", image: "https://images.unsplash.com/photo-1618826411640-d6df44dd3f7a?w=400&h=400&fit=crop" }
+            { name: "Azul", hex: "#C7CEEA", image: "images/productos/agenda2026_1.png" },
+            { name: "Rosa", hex: "#FF69B4", image: "images/productos/agenda2026_2.png" },
+            { name: "Verde", hex: "#A8E6CF", image: "images/productos/agendas_4.png" },
+            { name: "Rosa 2", hex: "#FFD6E8", image: "images/productos/agendas_5.png" },
+            { name: "Violeta", hex: "#CBA6F7", image: "images/productos/agendas_6.png" },
+            { name: "Verde oscuro", hex: "#2E8B57", image: "images/productos/agendas_7.png" },            
+
         ]
     },
     {
         id: 2,
-        name: "Sticker Rainbow",
-        description: "Hermoso sticker de arcoíris.",
-        type: "stickers",
-        subtype: "mates",
+        name: "Planners",
+        description: `¡🎁Agregale cualquier texto totalmente gratis!
+        
+        Todos los planners incluyen:
+        🌸 Portada personalizada
+        🗓️ Calendarios 2026 y 2027
+        🎯 Organizador anual
+        🌟 Organizador de objetivos
+        📅 Planner mensual 2026 (mes a mes en dos páginas)`,
+        type: "planners",
+        subtype: "planners",
         variants: [
             {
-                type: "holograficos",
+                type: "2026",
                 prices: {
-                    unit: "$550",
-                    pack3: "3 x $1.400",
-                    pack10: "10 x $4.500"
+                    unit: "$3000"
                 }
             },
             {
-                type: "mates",
+                type: "Perpetuo",
                 prices: {
-                    unit: "$450",
-                    pack3: "3 x $1.150",
-                    pack10: "10 x $3.800"
+                    unit: "$3000"
                 }
             }
         ],
         colors: [
-            { name: "Multicolor", hex: "#FFE5D9", image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400&h=400&fit=crop" }
+            { name: "Multicolor", hex: "#FFE5D9", image: "images/productos/planners_1.png"  }
         ]
     },
     {
@@ -73,21 +106,11 @@ const products = [
         subtype: "estudiantil",
         variants: [
             {
-                type: "tapa-dura",
+                type: "2026",
                 prices: {
-                    unit: "$13.500",
-                    pack3: "3 x $4.800",
-                    pack5: "5 x $7.500"
+                    unit: "$13.500"
                 }
             },
-            {
-                type: "tapa-blanda",
-                prices: {
-                    unit: "$13.500",
-                    pack3: "3 x $4.000",
-                    pack5: "5 x $6.500"
-                }
-            }
         ],
         colors: [
             { name: "Azul", hex: "#C7CEEA", image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=400&fit=crop" }
@@ -101,21 +124,17 @@ const products = [
         subtype: "docente",
         variants: [
             {
-                type: "tapa-dura",
+                type: "2026",
                 prices: {
-                    unit: "$2.000",
-                    pack3: "3 x $5.400",
-                    pack5: "5 x $8.500"
+                    unit: "$13.500"
                 }
             },
             {
-                type: "tapa-blanda",
+                type: "perpetua",
                 prices: {
-                    unit: "$1.800",
-                    pack3: "3 x $4.800",
-                    pack5: "5 x $7.800"
+                    unit: "$13.500"
                 }
-            }
+            },
         ],
         colors: [
             { name: "Verde", hex: "#C9F4E7", image: "https://images.unsplash.com/photo-1517842645767-c639042777db?w=400&h=400&fit=crop" }
@@ -171,10 +190,10 @@ function loadProducts() {
         card.className = 'product-card';
         card.onclick = () => openModal(product);
         card.innerHTML = `
-            <img class="product-image" src="${product.colors[0].image}" alt="${product.name}">
+            <img class="product-image ${product.imageFit}" src="${product.colors[0].image}" alt="${product.name}">
             <div class="product-name">${product.name}</div>
             <div class="product-price">${product.variants[0].prices.unit}</div>
-        `;
+        `;    
         grid.appendChild(card);
     });
 }
@@ -337,27 +356,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 });
-    // Hamburger menu toggle
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
-
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
-
-    // Cerrar menú al hacer clic en un link
-    document.querySelectorAll('nav ul li a').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        });
-    });
-
-    // Cerrar menú al hacer clic fuera
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('nav')) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        }
-    });
