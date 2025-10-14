@@ -48,6 +48,7 @@ const products = [
             📝 Hojas para notas
 
             📄 Diaria: 440 carillas
+            📄 2 dias x hoja: 280 carillas
             📄 Semanal: 180 carillas
             `,
         type: "agendas",
@@ -61,9 +62,15 @@ const products = [
                 }
             },
             {
+                type: "2 dias x hoja",
+                prices: {
+                    unit: "$16000"
+                }
+            },
+            {
                 type: "Diaria",
                 prices: {
-                    unit: "$28000"
+                    unit: "$18000"
                 }
             }
         ],
