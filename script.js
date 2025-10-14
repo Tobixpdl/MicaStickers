@@ -144,16 +144,50 @@ const products = [
                 prices: {
                     unit: "$3000"
                 }
+            }
+        ],
+        colors: [
+            { name: "Multicolor", hex: "#FFE5D9", image: "images/productos/planners_1.webp"  }
+        ]
+    },
+    {
+        id: 4,
+        name: "Plancha de stickers",
+        description: `¡🎁Personaliza tu plancha de stickers totalmente gratis!
+        
+        La plancha incluye aproximadamente 19 stickers de 6cm c/u`,
+        type: "stickers",
+        subtype: "todos",
+        imageFit: "contain",
+        variants: [
+            {
+                type: "mate",
+                prices: {
+                    unit: "$3000"
+                }
             },
             {
-                type: "Perpetuo",
+                type: "holografico",
                 prices: {
                     unit: "$3000"
                 }
             }
         ],
         colors: [
-            { name: "Multicolor", hex: "#FFE5D9", image: "images/productos/planners_1.webp"  }
+            { name: "mate", hex: "#FFE5D9", image: "images/planchas_stickers/mate_1.webp" },
+            { name: "argentina_1", hex: "#FFE5D9", image: "images/planchas_stickers/argentina_1.webp" },
+            { name: "argentina_2", hex: "#FFE5D9", image: "images/planchas_stickers/argentina_2.webp" },
+            { name: "argentina_3", hex: "#FFE5D9", image: "images/planchas_stickers/argentina_3.webp" },
+            { name: "bellota_RomeoSantos", hex: "#FFE5D9", image: "images/planchas_stickers/bellota_romeroSantos.webp" },
+            { name: "chicasSuperpoderosas", hex: "#FFE5D9", image: "images/planchas_stickers/chicasSuperpoderosas.webp" },
+            { name: "feminismo", hex: "#FFE5D9", image: "images/planchas_stickers/feminismo.webp" },
+            { name: "lgbt_1", hex: "#FFE5D9", image: "images/planchas_stickers/lgbt_1.webp" },
+            { name: "lgbt_2", hex: "#FFE5D9", image: "images/planchas_stickers/lgbt_2.webp" },
+            { name: "mix_1", hex: "#FFE5D9", image: "images/planchas_stickers/mix_1.webp" },
+            { name: "mix_anime", hex: "#FFE5D9", image: "images/planchas_stickers/mix_anime.webp" },
+            { name: "musica_1", hex: "#FFE5D9", image: "images/planchas_stickers/musica_1.webp" },
+            { name: "musica_2", hex: "#FFE5D9", image: "images/planchas_stickers/musica_2.webp" },
+            { name: "musica_3", hex: "#FFE5D9", image: "images/planchas_stickers/musica_3.webp" }
         ]
     }
 ];
@@ -273,6 +307,12 @@ function loadColorOptions() {
     const colorOptions = document.getElementById('colorOptions');
     colorOptions.innerHTML = '';
     
+    // Mostrar el nombre del primer diseño
+    if (currentProduct.colors.length > 0) {
+        document.getElementById('selectedDesignName').textContent = 
+            `Diseño: ${currentProduct.colors[0].name.replace(/_/g, ' ')}`;
+    }
+    
     currentProduct.colors.forEach((color, index) => {
         const colorBtn = document.createElement('div');
         colorBtn.className = 'color-option' + (index === 0 ? ' active' : '');
@@ -293,6 +333,8 @@ function changeVariant() {
 // Cambiar color
 function changeColor(color, element) {
     document.getElementById('modalImage').src = color.image;
+    document.getElementById('selectedDesignName').textContent = 
+        `Diseño: ${color.name.replace(/_/g, ' ')}`;
     document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('active'));
     element.classList.add('active');
 }
