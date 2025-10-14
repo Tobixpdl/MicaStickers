@@ -83,17 +83,16 @@
             </div>
             <h2 class="modal-title" id="modalTitle"></h2>
             <p class="modal-description" id="modalDescription"></p>
+            
             <div class="price-container">
+                <div class="variant-selector">
+                    <label for="variantSelector">Tipo:</label>
+                    <select id="variantSelector" onchange="changeVariant()">
+                    </select>
+                </div>
                 <div class="main-price" id="modalPriceMain"></div>
                 <div class="pack-prices" id="packPrices"></div>
             </div>
-
-            <div class="variant-selector">
-                <label for="variantSelector">Tipo:</label>
-                <select id="variantSelector" onchange="changeVariant()">
-                </select>
-            </div>
-
         </div>
     </div>
 
@@ -142,5 +141,4 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>
