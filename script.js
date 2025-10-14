@@ -33,7 +33,7 @@ const products = [
     {
         id: 1,
         name: "Agendas 2026",
-        description: `¡🎁Agregale cualquier texto totalmente gratis!
+        description: `¡🎁Personaliza tu portada totalmente gratis!
 
             La agenda te incluye:
             🌟 Hoja de datos personal
@@ -45,32 +45,90 @@ const products = [
             🌈 Portadas mes a mes + Planner mensual
             🕒 Semana a la vista (¡sin horarios, más libertad!)
             📞 Agenda telefónica
-            📝 Hojas para notas`,
+            📝 Hojas para notas
+
+            📄 Diaria: 440 carillas
+            📄 Semanal: 180 carillas
+            `,
         type: "agendas",
         subtype: "2026",
         imageFit: "contain",
         variants: [
             {
-                type: "2026",
+                type: "Semanal",
                 prices: {
                     unit: "$12000"
+                }
+            },
+            {
+                type: "Diaria",
+                prices: {
+                    unit: "$28000"
                 }
             }
         ],
         colors: [
-            { name: "Azul", hex: "#C7CEEA", image: "images/productos/agenda2026_1.png" },
-            { name: "Rosa", hex: "#FF69B4", image: "images/productos/agenda2026_2.png" },
-            { name: "Verde", hex: "#A8E6CF", image: "images/productos/agendas_4.png" },
-            { name: "Rosa 2", hex: "#FFD6E8", image: "images/productos/agendas_5.png" },
-            { name: "Violeta", hex: "#CBA6F7", image: "images/productos/agendas_6.png" },
-            { name: "Verde oscuro", hex: "#2E8B57", image: "images/productos/agendas_7.png" },            
+            { name: "Azul", hex: "#C7CEEA", image: "images/productos/agenda2026_1.webp" },
+            { name: "Rosa", hex: "#FF69B4", image: "images/productos/agenda2026_2.webp" },
+            { name: "Verde", hex: "#A8E6CF", image: "images/productos/agendas_4.webp" },
+            { name: "Rosa 2", hex: "#FFD6E8", image: "images/productos/agendas_5.webp" },
+            { name: "Violeta", hex: "#CBA6F7", image: "images/productos/agendas_6.webp" },
+            { name: "Verde oscuro", hex: "#2E8B57", image: "images/productos/agendas_7.webp" },            
 
         ]
     },
     {
         id: 2,
+        name: "Agenda Docente Secundario/Universitario",
+        description: `¡🎁Podés personalizar tu portada totalmente gratis!
+
+        La agenda incluye:
+        🪪 Hoja de datos personales
+        🔐 Hoja de contraseñas
+        🕒 Horario semanal
+        📝 Listados docentes y toma de posesión
+        🏫 Datos de establecimientos
+        🤝 Planilla de reuniones y licencias
+        📚 Seguimiento de trabajos prácticos y evaluaciones (para 15 cursos)
+        🎒 Planillas de calificaciones y asistencias (40 alumnos por curso)
+        🎈 Actos, eventos, salidas y viajes
+        🌟 Organizador anual + mensual perpetuo (14 meses)
+        📅 Organizador semanal perpetuo (1 año completo)
+        🎉 Fechas especiales + página de feriados
+        💬 Contactos, ideas y hojas rayadas para notas
+    
+        📄 280 carillas en total!`,
+        type: "agendas",
+        subtype: "docente",
+        imageFit: "contain",
+        variants: [
+            {
+                type: "2026",
+                prices: {
+                    unit: "$13.500"
+                }
+            },
+            {
+                type: "Perpetua",
+                prices: {
+                    unit: "$12.000"
+                }
+            }
+        ],
+        colors: [
+            { name: "Rosa", hex: "#FF69B4", image: "images/productos/agenda2026_2.webp" },
+            { name: "Violeta", hex: "#CBA6F7", image: "images/productos/agendas_6.webp" },
+            { name: "Azul", hex: "#C7CEEA", image: "images/productos/agenda2026_1.webp" },
+            { name: "Verde", hex: "#A8E6CF", image: "images/productos/agendas_4.webp" },
+            { name: "Rosa 2", hex: "#FFD6E8", image: "images/productos/agendas_5.webp" },
+            { name: "Verde oscuro", hex: "#2E8B57", image: "images/productos/agendas_7.webp" },            
+
+        ]
+    },
+    {
+        id: 3,
         name: "Planners",
-        description: `¡🎁Agregale cualquier texto totalmente gratis!
+        description: `¡🎁Personaliza tu portada totalmente gratis!
         
         Todos los planners incluyen:
         🌸 Portada personalizada
@@ -95,51 +153,9 @@ const products = [
             }
         ],
         colors: [
-            { name: "Multicolor", hex: "#FFE5D9", image: "images/productos/planners_1.png"  }
+            { name: "Multicolor", hex: "#FFE5D9", image: "images/productos/planners_1.webp"  }
         ]
     }
-     // {
-    //     id: 3,
-    //     name: "Agenda Estudiantil 2025",
-    //     description: "Agenda perfecta para estudiantes.",
-    //     type: "agendas",
-    //     subtype: "estudiantil",
-    //     variants: [
-    //         {
-    //             type: "2026",
-    //             prices: {
-    //                 unit: "$13.500"
-    //             }
-    //         },
-    //     ],
-    //     colors: [
-    //         { name: "Azul", hex: "#C7CEEA", image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=400&fit=crop" }
-    //     ]
-    // },
-    // {
-    //     id: 4,
-    //     name: "Agenda Docente 2025",
-    //     description: "Agenda diseñada para docentes.",
-    //     type: "agendas",
-    //     subtype: "docente",
-    //     variants: [
-    //         {
-    //             type: "2026",
-    //             prices: {
-    //                 unit: "$13.500"
-    //             }
-    //         },
-    //         {
-    //             type: "perpetua",
-    //             prices: {
-    //                 unit: "$13.500"
-    //             }
-    //         },
-    //     ],
-    //     colors: [
-    //         { name: "Verde", hex: "#C9F4E7", image: "https://images.unsplash.com/photo-1517842645767-c639042777db?w=400&h=400&fit=crop" }
-    //     ]
-    // }
 ];
 
 let currentProduct = null;
@@ -304,29 +320,29 @@ function calculateShipping() {
     
     const cp = parseInt(postalCode);
     let zone = '';
-    let price = 0;
+    let price = '0';
     let deliveryTime = '';
     
     if (cp >= 1000 && cp <= 1499) {
         zone = 'CABA';
-        price = 15000;
-        deliveryTime = '24-48 horas';
+        price = 'A coordinar';
+        deliveryTime = '1 semana';
     } else if (cp >= 1600 && cp <= 1900) {
         zone = 'GBA';
-        price = 20000;
-        deliveryTime = '2-3 días';
+        price = 'A coordinar';
+        deliveryTime = '1 semana';
     } else if (cp >= 1500 && cp <= 1599) {
         zone = 'GBA Norte';
-        price = 22000;
-        deliveryTime = '2-3 días';
+        price = 'A coordinar';
+        deliveryTime = '1 semana';
     } else if (cp >= 2000 && cp <= 3999) {
         zone = 'Buenos Aires Interior';
-        price = 28000;
-        deliveryTime = '3-5 días';
+        price = 'A coordinar';
+        deliveryTime = '1 semana';
     } else if (cp >= 4000 && cp <= 9999) {
         zone = 'Interior del país';
-        price = 35000;
-        deliveryTime = '5-7 días';
+        price = 'A coordinar';
+        deliveryTime = '1 semana';
     } else {
         resultDiv.innerHTML = '<p class="error-message">⚠️ Código postal no encontrado. Contactanos para consultar envío.</p>';
         return;
@@ -334,7 +350,7 @@ function calculateShipping() {
     
     resultDiv.innerHTML = `
         <div class="result-card">
-            <h3>💰 $${price.toLocaleString('es-AR')}</h3>
+            <h3> ${price.toLocaleString('es-AR')}</h3>
             <p><strong>Zona:</strong> ${zone}</p>
             <p><strong>Tiempo estimado:</strong> ${deliveryTime}</p>
             <p style="font-size: 12px; color: #999; margin-top: 10px;">
@@ -356,4 +372,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 });
-
