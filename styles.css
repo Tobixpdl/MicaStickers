@@ -330,17 +330,30 @@ nav a:hover {
 
 /* Responsive */
 @media (max-width: 768px) {
+
+    .hero{
+        padding: 10px 20px 20px;
+    }
+    
     .hero h1 {
-        font-size: 32px;
+        font-size: 29px;
     }
 
     .hero p {
         font-size: 16px;
     }
 
+    #navMenu{
+        display: block;
+    }
+
+    #navMenu ul{
+        margin-bottom: 5%;
+    }
+
     nav ul {
-        gap: 15px;
-        font-size: 14px;
+        gap: 10px;
+        font-size: 12px;
     }
 
     .products-grid {
@@ -361,6 +374,11 @@ nav a:hover {
         width: 50px;
         height: 50px;
         font-size: 24px;
+    }
+
+    #categoryBtn{
+        padding: 8px 13px;
+        font-size: 12px;
     }
 }
 
@@ -670,13 +688,8 @@ nav a:hover {
         font-size: 24px;
     }
     
-    nav ul {
-        gap: 15px;
-        font-size: 14px;
-    }
-    
     .logo {
-        font-size: 22px;
+        font-size: 18px;
     }
 }
 
@@ -757,6 +770,7 @@ nav a:hover {
     
     .main-price {
         font-size: 28px;
+        margin-top: 5%;
     }
     
     .pack-price {
@@ -775,5 +789,56 @@ nav a:hover {
 
     .color-selector h3{
         font-size: 14px !important;
+    }
+
+    .product-image{
+        max-height: 150px;
+    }
+
+    .product-name{
+        margin-bottom: 0;
+    }
+
+    .variant-selector label, .variant-selector select{
+        font-size:small;
+    }
+
+    .variant-selector select{
+        padding:5px;
+    }
+
+    .dropdown-content{
+        font-size: small;
+        min-width: 110px;
+    }
+
+    .shipping-footer{
+        padding: 5px 20px 30px;
+        margin-top: 0;
+    }
+
+    .shipping-menu{
+        display: none;
+    }
+
+}
+
+.dropdown-submenu.active .submenu-content {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .submenu-content {
+        position: static;
+        box-shadow: none;
+        margin-left: 20px;
+        border-left: 2px solid var(--pastel-purple);
+        margin-top: 5px;
+    }
+}
+
+@media (min-width: 769px) {
+    .dropdown-submenu:hover .submenu-content {
+        display: block;
     }
 }

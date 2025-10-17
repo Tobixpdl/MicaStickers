@@ -19,7 +19,7 @@
         <nav>
             <div class="logo">✨ NoTeAferresAlMar</div>
             <ul id="navMenu">
-                <li><a href="index.html">Inicio</a></li>
+                <!-- <li><a href="index.html">Inicio</a></li> -->
                 <li><a href="diseno.html">Diseñar mi agenda</a></li>
             </ul>
         </nav>
@@ -113,28 +113,26 @@
 
     <footer class="shipping-footer">
         <div class="footer-container">
-            <h2>📦 Calculá tu envío</h2>
-            <p class="footer-subtitle">Ingresá tu código postal para conocer el costo</p>
-            
-            <div class="shipping-calculator">
-                <input 
-                    type="text" 
-                    id="postalCode" 
-                    placeholder="Ej: 1425" 
-                    maxlength="4"
-                    pattern="[0-9]*"
-                >
-                <button onclick="calculateShipping()" class="calc-btn">Calcular</button>
+            <div class="shipping-menu">
+                <h2>📦 Calculá tu envío</h2>
+                <p class="footer-subtitle">Ingresá tu código postal para conocer el costo</p>
+                
+                <div class="shipping-calculator">
+                    <input 
+                        type="text" 
+                        id="postalCode" 
+                        placeholder="Ej: 1425" 
+                        maxlength="4"
+                        pattern="[0-9]*"
+                    >
+                    <button onclick="calculateShipping()" class="calc-btn">Calcular</button>
+                </div>
+                
+                <div id="shippingResult" class="shipping-result"></div>
             </div>
-            
-            <div id="shippingResult" class="shipping-result"></div>
             
             <div class="footer-info">
                 <p>🎨 NoTeAferresAlMar © 2025</p>
-                <div class="footer-links">
-                    <a href="sobre-nosotros.html">Sobre Nosotros</a>
-                    <a href="contacto.html">Contacto</a>
-                </div>
             </div>
         </div>
     </footer>

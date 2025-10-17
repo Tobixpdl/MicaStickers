@@ -58,19 +58,19 @@ const products = [
             {
                 type: "Semanal",
                 prices: {
-                    unit: "$12000"
+                    unit: "$12.000"
                 }
             },
             {
                 type: "2 dias x hoja",
                 prices: {
-                    unit: "$16000"
+                    unit: "$16.000"
                 }
             },
             {
                 type: "Diaria",
                 prices: {
-                    unit: "$18000"
+                    unit: "$18.000"
                 }
             }
         ],
@@ -86,7 +86,7 @@ const products = [
     },
     {
         id: 2,
-        name: "Agenda Docente Secundario/Universitario",
+        name: "Agenda Docente",
         description: `¡🎁Podés personalizar tu portada totalmente gratis!
 
         La agenda incluye:
@@ -110,15 +110,15 @@ const products = [
         imageFit: "contain",
         variants: [
             {
-                type: "2026",
+                type: "Secundario/Universidad",
                 prices: {
                     unit: "$13.500"
                 }
             },
             {
-                type: "Perpetua",
+                type: "Primario",
                 prices: {
-                    unit: "$12.000"
+                    unit: "$15.000"
                 }
             }
         ],
@@ -149,7 +149,7 @@ const products = [
             {
                 type: "2026",
                 prices: {
-                    unit: "$3000"
+                    unit: "$3.000"
                 }
             }
         ],
@@ -170,13 +170,13 @@ const products = [
             {
                 type: "mate",
                 prices: {
-                    unit: "$3000"
+                    unit: "$3.000"
                 }
             },
             {
                 type: "holografico",
                 prices: {
-                    unit: "$3000"
+                    unit: "$3.000"
                 }
             }
         ],
@@ -203,19 +203,16 @@ let currentProduct = null;
 let currentVariantIndex = 0;
 let currentFilter = 'todos';
 
-// Toggle dropdown
 document.getElementById('categoryBtn').addEventListener('click', function() {
     document.getElementById('categoryDropdown').classList.toggle('active');
 });
 
-// Cerrar dropdown al hacer clic afuera
 document.addEventListener('click', function(e) {
     if (!e.target.closest('.filter-dropdown')) {
         document.getElementById('categoryDropdown').classList.remove('active');
     }
 });
 
-// Función para seleccionar categoría
 function selectCategory(filter, displayName) {
     currentFilter = filter;
     document.getElementById('selectedCategory').textContent = displayName;
@@ -223,7 +220,6 @@ function selectCategory(filter, displayName) {
     loadProducts();
 }
 
-// Cargar productos con filtro
 function loadProducts() {
     const grid = document.getElementById('productsGrid');
     grid.innerHTML = '';
@@ -255,7 +251,6 @@ function loadProducts() {
     });
 }
 
-// Abrir modal
 function openModal(product) {
     currentProduct = product;
     currentVariantIndex = 0;
@@ -273,14 +268,12 @@ function openModal(product) {
     document.body.style.overflow = 'hidden';
 }
 
-// Cerrar modal
 function closeModal() {
     const modal = document.getElementById('productModal');
     modal.classList.remove('active');
     document.body.style.overflow = 'auto';
 }
 
-// Actualizar precios
 function updatePrices() {
     const variant = currentProduct.variants[currentVariantIndex];
     const prices = variant.prices;
@@ -295,7 +288,6 @@ function updatePrices() {
     document.getElementById('packPrices').innerHTML = packPricesHtml;
 }
 
-// Cargar selector de variantes
 function loadVariantSelector() {
     const variantSelector = document.getElementById('variantSelector');
     variantSelector.innerHTML = '';
@@ -309,12 +301,10 @@ function loadVariantSelector() {
     });
 }
 
-// Cargar opciones de color
 function loadColorOptions() {
     const colorOptions = document.getElementById('colorOptions');
     colorOptions.innerHTML = '';
     
-    // Mostrar el nombre del primer diseño
     if (currentProduct.colors.length > 0) {
         document.getElementById('selectedDesignName').textContent = 
             `Diseño: ${currentProduct.colors[0].name.replace(/_/g, ' ')}`;
@@ -330,14 +320,12 @@ function loadColorOptions() {
     });
 }
 
-// Cambiar variante
 function changeVariant() {
     const selector = document.getElementById('variantSelector');
     currentVariantIndex = parseInt(selector.value);
     updatePrices();
 }
 
-// Cambiar color
 function changeColor(color, element) {
     document.getElementById('modalImage').src = color.image;
     document.getElementById('selectedDesignName').textContent = 
@@ -346,22 +334,18 @@ function changeColor(color, element) {
     element.classList.add('active');
 }
 
-// Cerrar modal al hacer clic fuera
 document.getElementById('productModal').addEventListener('click', (e) => {
     if (e.target.id === 'productModal') {
         closeModal();
     }
 });
 
-// Cargar productos al iniciar
 loadProducts();
 
-// Calculadora de envío (simulada basada en zonas)
 function calculateShipping() {
     const postalCode = document.getElementById('postalCode').value;
     const resultDiv = document.getElementById('shippingResult');
     
-    // Validación
     if (!postalCode || postalCode.length !== 4 || !/^\d+$/.test(postalCode)) {
         resultDiv.innerHTML = '<p class="error-message">⚠️ Por favor ingresá un código postal válido de 4 dígitos</p>';
         return;
@@ -409,7 +393,6 @@ function calculateShipping() {
     `;
 }
 
-// Permitir calcular con Enter
 document.addEventListener('DOMContentLoaded', function() {
     const postalInput = document.getElementById('postalCode');
     if (postalInput) {
@@ -420,4 +403,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+});
+
+document.querySelectorAll('.submenu-trigger').forEach(trigger => {
+    trigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        document.querySelectorAll('.dropdown-submenu').forEach(submenu => {
+            if (submenu !== this.parentElement) {
+                submenu.classList.remove('active');
+            }
+        });
+        
+        this.parentElement.classList.toggle('active');
+    });
 });
