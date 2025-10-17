@@ -110,6 +110,12 @@ const products = [
         imageFit: "contain",
         variants: [
             {
+                type: "Inicial",
+                prices: {
+                    unit: "$13.500"
+                }
+            },
+            {
                 type: "Secundario/Universidad",
                 prices: {
                     unit: "$13.500"
@@ -118,7 +124,7 @@ const products = [
             {
                 type: "Primario",
                 prices: {
-                    unit: "$15.000"
+                    unit: "$13.500"
                 }
             }
         ],
