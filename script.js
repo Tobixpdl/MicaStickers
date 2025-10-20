@@ -301,7 +301,12 @@ function loadProducts() {
         card.className = 'product-card';
         card.onclick = () => openModal(product);
         card.innerHTML = `
-            <img class="product-image ${product.imageFit}" src="${product.colors[0].image}" alt="${product.name}">
+            <img class="product-image ${product.imageFit}" 
+                src="${product.colors[0].image}" 
+                alt="${product.name} - NoTeAferresAlMar" 
+                loading="lazy"
+                width="280" 
+                height="250">
             <div class="product-name">${product.name}</div>
             <div class="product-price">${product.variants[0].prices.unit}</div>
         `;    

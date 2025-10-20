@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Disallow: /disenoscript.js
+Disallow: /script.js
+
+Sitemap: https://tobixpdl.github.io/NoTeAferresAlMar/sitemap.xml
+
+User-agent: Googlebot
+Allow: /
+Allow: /images/
+Allow: /*.css
+Allow: /*.js
+
+User-agent: Bingbot
+Allow: /
