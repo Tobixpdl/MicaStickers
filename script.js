@@ -35,7 +35,7 @@ const products = [
         name: "Agendas 2026",
         description: `¡🎁Personaliza tu portada totalmente gratis!
 
-            La agenda te incluye:
+            La agenda incluye:
             🌟 Hoja de datos personal
             🗓️ Calendarios 2026 / 2027
             🎯 Organizador anual
@@ -165,7 +165,53 @@ const products = [
     },
     {
         id: 4,
-        name: "Plancha de stickers",
+        name: "Plancha de stickers Mate",
+        description: `¡🎁Personaliza tu plancha de stickers totalmente gratis!
+        
+        La plancha incluye aproximadamente 19 stickers de 6cm c/u. Más planchas, MAS BARATO!`,
+        type: "stickers",
+        subtype: "todos",
+        imageFit: "contain",
+        variants: [
+            {
+                type: "1 Plancha",
+                prices: {
+                    unit: "$1.500"
+                }
+            },
+            {
+                type: "10 planchas",
+                prices: {
+                    unit: "$12.000"
+                }
+            },
+            {
+                type: "20 planchas",
+                prices: {
+                    unit: "$20.000"
+                }
+            }
+        ],
+        colors: [
+            { name: "mate", hex: "#FFE5D9", image: "images/planchas_stickers/mate_1.webp" },
+            { name: "argentina_1", hex: "#FFE5D9", image: "images/planchas_stickers/argentina_1.webp" },
+            { name: "argentina_2", hex: "#FFE5D9", image: "images/planchas_stickers/argentina_2.webp" },
+            { name: "argentina_3", hex: "#FFE5D9", image: "images/planchas_stickers/argentina_3.webp" },
+            { name: "bellota_RomeoSantos", hex: "#FFE5D9", image: "images/planchas_stickers/bellota_romeroSantos.webp" },
+            { name: "chicasSuperpoderosas", hex: "#FFE5D9", image: "images/planchas_stickers/chicasSuperpoderosas.webp" },
+            { name: "feminismo", hex: "#FFE5D9", image: "images/planchas_stickers/feminismo.webp" },
+            { name: "lgbt_1", hex: "#FFE5D9", image: "images/planchas_stickers/lgbt_1.webp" },
+            { name: "lgbt_2", hex: "#FFE5D9", image: "images/planchas_stickers/lgbt_2.webp" },
+            { name: "mix_1", hex: "#FFE5D9", image: "images/planchas_stickers/mix_1.webp" },
+            { name: "mix_anime", hex: "#FFE5D9", image: "images/planchas_stickers/mix_anime.webp" },
+            { name: "musica_1", hex: "#FFE5D9", image: "images/planchas_stickers/musica_1.webp" },
+            { name: "musica_2", hex: "#FFE5D9", image: "images/planchas_stickers/musica_2.webp" },
+            { name: "musica_3", hex: "#FFE5D9", image: "images/planchas_stickers/musica_3.webp" }
+        ]
+    },
+    {
+        id: 4,
+        name: "Plancha de stickers Holográficos",
         description: `¡🎁Personaliza tu plancha de stickers totalmente gratis!
         
         La plancha incluye aproximadamente 19 stickers de 6cm c/u`,
@@ -174,15 +220,21 @@ const products = [
         imageFit: "contain",
         variants: [
             {
-                type: "mate",
+                type: "1 Plancha",
                 prices: {
                     unit: "$3.000"
                 }
             },
             {
-                type: "holografico",
+                type: "10 planchas",
                 prices: {
-                    unit: "$3.000"
+                    unit: "$24.000"
+                }
+            },
+            {
+                type: "20 planchas",
+                prices: {
+                    unit: "$40.000"
                 }
             }
         ],
@@ -280,19 +332,48 @@ function closeModal() {
     document.body.style.overflow = 'auto';
 }
 
+
 function updatePrices() {
     const variant = currentProduct.variants[currentVariantIndex];
     const prices = variant.prices;
     
     document.getElementById('modalPriceMain').textContent = prices.unit;
     
+    // Calcular ahorro comparando con precio unitario
+    let savingsMessage = '';
+    if (currentProduct.type === 'stickers') {
+        const variant1 = currentProduct.variants.find(v => v.type === '1 Plancha');
+        
+        if (variant1) {
+            const priceUnit = parseInt(variant1.prices.unit.replace(/[$.]/g, ''));
+            const currentPrice = parseInt(prices.unit.replace(/[$.]/g, ''));
+            let quantity = 0;
+            let savings = 0;
+            
+            // Determinar la cantidad según el tipo de variante
+            if (variant.type === '10 planchas') {
+                quantity = 10;
+                savings = (priceUnit * quantity) - currentPrice;
+            } else if (variant.type === '20 planchas') {
+                quantity = 20;
+                savings = (priceUnit * quantity) - currentPrice;
+            }
+            
+            if (savings > 0) {
+                savingsMessage = `<div class="savings-badge">¡AHORRÁS ${savings.toLocaleString('es-AR')}!</div>`;
+            }
+        }
+    }
+    
     const packPricesHtml = Object.entries(prices)
         .filter(([key]) => key !== 'unit')
         .map(([key, value]) => `<div class="pack-price">${value}</div>`)
         .join('');
     
-    document.getElementById('packPrices').innerHTML = packPricesHtml;
+    document.getElementById('packPrices').innerHTML = savingsMessage + packPricesHtml;
 }
+
+
 
 function loadVariantSelector() {
     const variantSelector = document.getElementById('variantSelector');

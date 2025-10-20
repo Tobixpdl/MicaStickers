@@ -187,6 +187,10 @@ nav a:hover {
     animation: modalSlideIn 0.3s ease-out;
 }
 
+.shipping-menu{
+    display: none;
+}
+
 @keyframes modalSlideIn {
     from {
         transform: translateY(-50px);
@@ -537,8 +541,8 @@ nav a:hover {
 .shipping-footer {
     background: linear-gradient(135deg, rgba(255, 214, 232, 0.95), rgba(199, 206, 234, 0.95));
     backdrop-filter: blur(10px);
-    padding: 50px 20px 30px;
-    margin-top: 60px;
+    padding: 20px 20px 30px;
+    
 }
 
 .footer-container {
@@ -841,4 +845,47 @@ nav a:hover {
     .dropdown-submenu:hover .submenu-content {
         display: block;
     }
+}
+
+.pack-price {
+    font-size: 16px;
+    color: #666;
+    background: var(--pastel-yellow);
+    padding: 8px 15px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+/* Badge de ahorro */
+.savings-badge {
+    font-size: 18px;
+    color: white;
+    background: linear-gradient(135deg, #10b981, #059669);
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-weight: bold;
+    text-align: center;
+    animation: pulse 2s infinite;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    margin-bottom: 10px;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+
+.pack-price {
+    font-size: 14px;
+    padding: 6px 12px;
+}
+
+.savings-badge {
+    font-size: 14px;
+    padding: 8px 15px;
 }
