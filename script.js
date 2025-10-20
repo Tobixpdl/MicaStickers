@@ -339,7 +339,6 @@ function updatePrices() {
     
     document.getElementById('modalPriceMain').textContent = prices.unit;
     
-    // Calcular ahorro comparando con precio unitario
     let savingsMessage = '';
     if (currentProduct.type === 'stickers') {
         const variant1 = currentProduct.variants.find(v => v.type === '1 Plancha');
@@ -350,7 +349,6 @@ function updatePrices() {
             let quantity = 0;
             let savings = 0;
             
-            // Determinar la cantidad según el tipo de variante
             if (variant.type === '10 planchas') {
                 quantity = 10;
                 savings = (priceUnit * quantity) - currentPrice;
