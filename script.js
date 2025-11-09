@@ -58,19 +58,19 @@ const products = [
             {
                 type: "Semanal",
                 prices: {
-                    unit: "$12.000"
+                    unit: "$14.000"
                 }
             },
             {
                 type: "2 dias x hoja",
                 prices: {
-                    unit: "$16.000"
+                    unit: "$18.000"
                 }
             },
             {
                 type: "Diaria",
                 prices: {
-                    unit: "$18.000"
+                    unit: "$24.000"
                 }
             }
         ],
@@ -112,19 +112,19 @@ const products = [
             {
                 type: "Inicial",
                 prices: {
-                    unit: "$13.500"
+                    unit: "$16.500"
                 }
             },
             {
                 type: "Secundario/Universidad",
                 prices: {
-                    unit: "$13.500"
+                    unit: "$16.500"
                 }
             },
             {
                 type: "Primario",
                 prices: {
-                    unit: "$13.500"
+                    unit: "$16.500"
                 }
             }
         ],
@@ -153,11 +153,23 @@ const products = [
         subtype: "planners",
         variants: [
             {
-                type: "2026",
+                type: "Mensual 2026",
                 prices: {
-                    unit: "$3.000"
+                    unit: "$4.000"
                 }
-            }
+            },
+            {
+                type: "Mensual perpetuo",
+                prices: {
+                    unit: "$4.000"
+                }
+            },
+             {
+                type: "Semanal",
+                prices: {
+                    unit: "$5.000"
+                }
+            },
         ],
         colors: [
             { name: "Multicolor", hex: "#FFE5D9", image: "images/productos/planners_1.webp"  }
@@ -165,10 +177,10 @@ const products = [
     },
     {
         id: 4,
-        name: "Plancha de stickers Mate",
+        name: "Plancha de stickers Papel",
         description: `¡🎁Personaliza tu plancha de stickers totalmente gratis!
         
-        La plancha incluye aproximadamente 19 stickers de 6cm c/u. Más planchas, MAS BARATO!`,
+        La plancha incluye 20 stickers de 5cm c/u. Más planchas, MAS BARATO!`,
         type: "stickers",
         subtype: "todos",
         imageFit: "contain",
@@ -211,10 +223,56 @@ const products = [
     },
     {
         id: 4,
-        name: "Plancha de stickers Holográficos",
+        name: "Plancha de stickers vinilo",
         description: `¡🎁Personaliza tu plancha de stickers totalmente gratis!
         
-        La plancha incluye aproximadamente 19 stickers de 6cm c/u`,
+        La plancha incluye 20 stickers de 5cm c/u`,
+        type: "stickers",
+        subtype: "todos",
+        imageFit: "contain",
+        variants: [
+            {
+                type: "1 Plancha",
+                prices: {
+                    unit: "$2.000"
+                }
+            },
+            {
+                type: "10 planchas",
+                prices: {
+                    unit: "$18.000"
+                }
+            },
+            {
+                type: "20 planchas",
+                prices: {
+                    unit: "$30.000"
+                }
+            }
+        ],
+        colors: [
+            { name: "mate", hex: "#FFE5D9", image: "images/planchas_stickers/mate_1.webp" },
+            { name: "argentina_1", hex: "#FFE5D9", image: "images/planchas_stickers/argentina_1.webp" },
+            { name: "argentina_2", hex: "#FFE5D9", image: "images/planchas_stickers/argentina_2.webp" },
+            { name: "argentina_3", hex: "#FFE5D9", image: "images/planchas_stickers/argentina_3.webp" },
+            { name: "bellota_RomeoSantos", hex: "#FFE5D9", image: "images/planchas_stickers/bellota_romeroSantos.webp" },
+            { name: "chicasSuperpoderosas", hex: "#FFE5D9", image: "images/planchas_stickers/chicasSuperpoderosas.webp" },
+            { name: "feminismo", hex: "#FFE5D9", image: "images/planchas_stickers/feminismo.webp" },
+            { name: "lgbt_1", hex: "#FFE5D9", image: "images/planchas_stickers/lgbt_1.webp" },
+            { name: "lgbt_2", hex: "#FFE5D9", image: "images/planchas_stickers/lgbt_2.webp" },
+            { name: "mix_1", hex: "#FFE5D9", image: "images/planchas_stickers/mix_1.webp" },
+            { name: "mix_anime", hex: "#FFE5D9", image: "images/planchas_stickers/mix_anime.webp" },
+            { name: "musica_1", hex: "#FFE5D9", image: "images/planchas_stickers/musica_1.webp" },
+            { name: "musica_2", hex: "#FFE5D9", image: "images/planchas_stickers/musica_2.webp" },
+            { name: "musica_3", hex: "#FFE5D9", image: "images/planchas_stickers/musica_3.webp" }
+        ]
+    },
+     {
+        id: 4,
+        name: "Plancha de stickers holograficos",
+        description: `¡🎁Personaliza tu plancha de stickers totalmente gratis!
+        
+        La plancha incluye 20 stickers de 5cm c/u`,
         type: "stickers",
         subtype: "todos",
         imageFit: "contain",
@@ -228,13 +286,13 @@ const products = [
             {
                 type: "10 planchas",
                 prices: {
-                    unit: "$24.000"
+                    unit: "$28.000"
                 }
             },
             {
                 type: "20 planchas",
                 prices: {
-                    unit: "$40.000"
+                    unit: "$50.000"
                 }
             }
         ],
@@ -509,3 +567,4 @@ document.querySelectorAll('.submenu-trigger').forEach(trigger => {
         this.parentElement.classList.toggle('active');
     });
 });
+
