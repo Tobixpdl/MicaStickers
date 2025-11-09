@@ -222,7 +222,7 @@ const products = [
         ]
     },
     {
-        id: 4,
+        id: 5,
         name: "Plancha de stickers vinilo",
         description: `¡🎁Personaliza tu plancha de stickers totalmente gratis!
         
@@ -251,9 +251,9 @@ const products = [
             }
         ],
         colors: [
+            { name: "argentina_2", hex: "#FFE5D9", image: "images/planchas_stickers/argentina_2.webp" },
             { name: "mate", hex: "#FFE5D9", image: "images/planchas_stickers/mate_1.webp" },
             { name: "argentina_1", hex: "#FFE5D9", image: "images/planchas_stickers/argentina_1.webp" },
-            { name: "argentina_2", hex: "#FFE5D9", image: "images/planchas_stickers/argentina_2.webp" },
             { name: "argentina_3", hex: "#FFE5D9", image: "images/planchas_stickers/argentina_3.webp" },
             { name: "bellota_RomeoSantos", hex: "#FFE5D9", image: "images/planchas_stickers/bellota_romeroSantos.webp" },
             { name: "chicasSuperpoderosas", hex: "#FFE5D9", image: "images/planchas_stickers/chicasSuperpoderosas.webp" },
@@ -268,7 +268,7 @@ const products = [
         ]
     },
      {
-        id: 4,
+        id: 6,
         name: "Plancha de stickers holograficos",
         description: `¡🎁Personaliza tu plancha de stickers totalmente gratis!
         
@@ -297,8 +297,8 @@ const products = [
             }
         ],
         colors: [
-            { name: "mate", hex: "#FFE5D9", image: "images/planchas_stickers/mate_1.webp" },
             { name: "argentina_1", hex: "#FFE5D9", image: "images/planchas_stickers/argentina_1.webp" },
+            { name: "mate", hex: "#FFE5D9", image: "images/planchas_stickers/mate_1.webp" },
             { name: "argentina_2", hex: "#FFE5D9", image: "images/planchas_stickers/argentina_2.webp" },
             { name: "argentina_3", hex: "#FFE5D9", image: "images/planchas_stickers/argentina_3.webp" },
             { name: "bellota_RomeoSantos", hex: "#FFE5D9", image: "images/planchas_stickers/bellota_romeroSantos.webp" },
@@ -311,6 +311,43 @@ const products = [
             { name: "musica_1", hex: "#FFE5D9", image: "images/planchas_stickers/musica_1.webp" },
             { name: "musica_2", hex: "#FFE5D9", image: "images/planchas_stickers/musica_2.webp" },
             { name: "musica_3", hex: "#FFE5D9", image: "images/planchas_stickers/musica_3.webp" }
+        ]
+    },
+    {
+        id: 7,
+        name: "Cuadernos anillados A5",
+        description: `¡Cuadernos rayados o cuadriculados para estudiar o solo escribir tus pensamientos!`,
+        type: "cuaderno",
+        subtype: "todos",
+        imageFit: "contain",
+        variants: [
+            {
+                type: "60 hojas",
+                prices: {
+                    unit: "$8.500"
+                }
+            },
+            {
+                type: "80 hojas",
+                prices: {
+                    unit: "$9.500"
+                }
+            },
+            {
+                type: "100 hojas",
+                prices: {
+                    unit: "$10.000"
+                }
+            },
+             {
+                type: "12 hojas",
+                prices: {
+                    unit: "$10.500"
+                }
+            }
+        ],
+        colors: [
+             { name: "Verde", hex: "#A8E6CF", image: "images/productos/agendas_4.webp" },
         ]
     }
 ];
@@ -567,4 +604,5 @@ document.querySelectorAll('.submenu-trigger').forEach(trigger => {
         this.parentElement.classList.toggle('active');
     });
 });
+
 
